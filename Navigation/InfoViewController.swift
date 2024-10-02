@@ -39,22 +39,30 @@ class InfoViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
+    
+    func constraintsActivation() {
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        ])
+    }
+    
+    func addAndSetupButton() {
+        view.addSubview(button)
+        button.addTarget(self, action: #selector(didPressButton), for: .touchUpInside)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        constraintsActivation()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .systemGray6
         self.title = "Info"
         
-        // Add and setup button
-        view.addSubview(button)
-        button.addTarget(self, action: #selector(didPressButton), for: .touchUpInside)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        ])
-        
+        addAndSetupButton()
     }
 
 }

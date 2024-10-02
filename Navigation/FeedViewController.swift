@@ -26,6 +26,13 @@ class FeedViewController: UIViewController {
         self.navigationController?.pushViewController(postViewContrroller, animated: true)
     }
 
+    func constraintsActivation() {
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        ])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,10 +40,7 @@ class FeedViewController: UIViewController {
         self.view.addSubview(button)
         self.button.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        ])
+        constraintsActivation()
         
         self.button.addTarget(self, action: #selector(didPressButton), for: .touchUpInside)
     }

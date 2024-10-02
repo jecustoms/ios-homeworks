@@ -36,13 +36,17 @@ class PostViewController: UIViewController {
         self.navigationController?.pushViewController(ivc, animated: true)
     }
     
+    func addButtonToNavBar() {
+        informationButton.addTarget(self, action: #selector(didPressButton), for: .touchUpInside)
+        self.navigationItem.setRightBarButton(UIBarButtonItem(customView: informationButton), animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .systemGray4
         self.title = post.title
         
-        informationButton.addTarget(self, action: #selector(didPressButton), for: .touchUpInside)
-        self.navigationItem.setRightBarButton(UIBarButtonItem(customView: informationButton), animated: true)
+        addButtonToNavBar()
     }
 }
