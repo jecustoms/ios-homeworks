@@ -22,7 +22,6 @@ class FeedViewController: UIViewController {
         print(#function)
     }
 
-    // create button
     private func createButton() {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
         
@@ -36,7 +35,6 @@ class FeedViewController: UIViewController {
         print(#function)
     }
 
-    // action on button press
     @objc private func tapAction() {
         let postVC = PostViewController()
         

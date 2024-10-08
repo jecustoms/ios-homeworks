@@ -20,7 +20,6 @@ class InfoViewController: UIViewController {
         createButton()
     }
 
-    // create button
     private func createButton() {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
         
@@ -34,12 +33,8 @@ class InfoViewController: UIViewController {
         print(#function)
     }
 
-    // action on button press
     @objc private func tapAction() {
-        // alert window
         let alert = UIAlertController(title: "Attention!", message: "The text message", preferredStyle: .alert)
-        
-        // add action for alert
         let okAction = UIAlertAction(title: "ОК", style: .default) { _ in
             print("OK pressed")
         }
