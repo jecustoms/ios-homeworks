@@ -8,61 +8,48 @@
 import UIKit
 
 class InfoViewController: UIViewController {
-    
-    // Show allert Button setup
-    private var button: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Delete post", for: .normal)
-        return button
-    }()
-    
-    
-    // Show Alert on button press
-    @objc func didPressButton() {
-        // Create Alert object
-        let alert = UIAlertController(
-            title: "Delete",
-            message: "If you delete this post, it will no longer be available",
-            preferredStyle: .alert
-        )
-        
-        // Print used action to console
-        func consolePrint(action: UIAlertAction) {
-            print(action.title!)
-        }
-        
-        // Set couple alert Actions
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: consolePrint))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: consolePrint))
-        
-        // Show Alert
-        self.present(alert, animated: true, completion: nil)
-    }
 
-    
-    func constraintsActivation() {
-        NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        ])
-    }
-    
-    func addAndSetupButton() {
-        view.addSubview(button)
-        button.addTarget(self, action: #selector(didPressButton), for: .touchUpInside)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        constraintsActivation()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = .systemGray6
-        self.title = "Info"
+
+        if self.title == nil {
+            self.title = "Default info title"
+        }
         
-        addAndSetupButton()
+        createButton()
     }
 
+    // create button
+    private func createButton() {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+        
+        button.center = view.center
+        button.setTitle("Press", for: .normal)
+        button.backgroundColor = .systemMint
+        button.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
+        
+        view.addSubview(button)
+        
+        print(#function)
+    }
+
+    // action on button press
+    @objc private func tapAction() {
+        // alert window
+        let alert = UIAlertController(title: "Attention!", message: "The text message", preferredStyle: .alert)
+        
+        // add action for alert
+        let okAction = UIAlertAction(title: "ОК", style: .default) { _ in
+            print("OK pressed")
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { _ in
+            print("CANCEL pressed")
+        }
+        
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+    }
 }

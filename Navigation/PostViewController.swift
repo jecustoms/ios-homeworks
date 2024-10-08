@@ -7,46 +7,29 @@
 
 import UIKit
 
-struct Post {
-    let title: String
-}
-
 class PostViewController: UIViewController {
-    
-    var post: Post
-    
-    init(post: Post) {
-        self.post = post
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private var informationButton: UIButton = {
-        let button = UIButton(type: .infoLight)
-        button.setTitle("", for: .normal)
-        return button
-    }()
-    
-    // Open Info on press
-    @objc func didPressButton() {
-        let ivc = InfoViewController()
-        self.navigationController?.pushViewController(ivc, animated: true)
-    }
-    
-    func addButtonToNavBar() {
-        informationButton.addTarget(self, action: #selector(didPressButton), for: .touchUpInside)
-        self.navigationItem.setRightBarButton(UIBarButtonItem(customView: informationButton), animated: true)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.view.backgroundColor = .systemGray4
-        self.title = post.title
-        
-        addButtonToNavBar()
+
+        if self.title == nil {
+            self.title = "Default post title"
+        }
+
+        createBarButtonItem()
+
+        print(#function)
+    }
+    
+    private func createBarButtonItem() {
+        let barButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(tapAction))
+        navigationItem.rightBarButtonItem = barButtonItem
+    }
+    
+    @objc private func tapAction() {
+        let infoVC = InfoViewController()
+        present(infoVC, animated: true)
     }
 }
