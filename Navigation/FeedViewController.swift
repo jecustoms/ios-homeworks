@@ -7,41 +7,43 @@
 
 import UIKit
 
-import UIKit
-
 class FeedViewController: UIViewController {
-    
-    private var button: UIButton = {
-        let button = UIButton(type: .system)
-    
-        button.setTitle("Open", for: .normal)
-        
-        return button
-    }()
-    
-    @objc func didPressButton() {
-        let currentPost = Post(title: "Post")
-        let postViewContrroller = PostViewController(post: currentPost)
-        
-        self.navigationController?.pushViewController(postViewContrroller, animated: true)
-    }
 
-    func constraintsActivation() {
-        NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        ])
-    }
-    
+    let post = Post(title: " Post title")
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .systemGray2
-        self.view.addSubview(button)
-        self.button.translatesAutoresizingMaskIntoConstraints = false
+        self.title = "Feed"
         
-        constraintsActivation()
+        createButton()
+
+        print(#function)
+    }
+
+    // create button
+    private func createButton() {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
         
-        self.button.addTarget(self, action: #selector(didPressButton), for: .touchUpInside)
+        button.center = view.center
+        button.setTitle("Open", for: .normal)
+        button.backgroundColor = .systemMint
+        button.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
+        
+        view.addSubview(button)
+        
+        print(#function)
+    }
+
+    // action on button press
+    @objc private func tapAction() {
+        let postVC = PostViewController()
+        
+        postVC.title = post.title
+        
+        navigationController?.pushViewController(postVC, animated: true)
+        
+        print(#function)
     }
 }
