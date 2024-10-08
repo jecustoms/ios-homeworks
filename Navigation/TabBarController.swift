@@ -14,11 +14,14 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupControllers()
+        setControllers()
         print(#function)
     }
     
-    private func setupControllers() {
+    private func setControllers() {
+        UITabBar.appearance().backgroundColor = .white
+        UITabBar.appearance().tintColor = .blue
+        
         let feedNC = UINavigationController(rootViewController: feedVC)
         let profileNC = UINavigationController(rootViewController: profileVC)
         
@@ -30,7 +33,8 @@ class TabBarController: UITabBarController {
         
         feedNC.view.backgroundColor = .brown
         profileNC.view.backgroundColor = .cyan
-        
+        profileNC.navigationBar.backgroundColor = .white
+
         viewControllers = [feedNC, profileNC]
         print(#function)
     }

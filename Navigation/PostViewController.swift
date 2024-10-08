@@ -11,16 +11,16 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setControllers()
+        createBarButtonItem()
+        print(#function)
+    }
+    
+    private func setControllers() {
         self.view.backgroundColor = .systemGray4
-
         if self.title == nil {
             self.title = "Default post title"
         }
-
-        createBarButtonItem()
-
-        print(#function)
     }
     
     private func createBarButtonItem() {
