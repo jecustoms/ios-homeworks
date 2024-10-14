@@ -1,20 +1,44 @@
-//
-//  ProfileHeaderView.swift
-//  Navigation
-//
-//  Created by Evgeny Nikiforov on 08.10.2024.
-//
-
 import UIKit
 
 class ProfileHeaderView: UIView {
 
+    //настройка ограничений
+    private func setLayouts() {
+        NSLayoutConstraint.activate([
+            //avatarImageView
+            avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 120),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 120),
+
+            //setStatusButton
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
+            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+
+            //fullNameLabel
+            fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+
+            //statusLabel
+            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -34),
+            statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            //statusLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            statusLabel.heightAnchor.constraint(equalToConstant: 24),
+            //statusLabel.widthAnchor.constraint(equalToConstant: 100)
+            statusLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        ])
+    }
+
     //аватар профиля
-    private lazy var profileImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 16, y: 16, width: 150, height: 150))
+    private lazy var avatarImageView: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .white
         image.image = UIImage(named: "profileImage")
-        image.layer.cornerRadius = 75
+        image.layer.cornerRadius = 60
         image.clipsToBounds = true
         image.layer.borderWidth = 3
         image.layer.borderColor = UIColor.white.cgColor
@@ -22,8 +46,9 @@ class ProfileHeaderView: UIView {
     }()
 
     //имя профиля
-    private lazy var profileLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 200, y: 27, width: 200, height: 18))
+    private lazy var fullNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Profile Name"
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = UIColor.black
@@ -31,8 +56,9 @@ class ProfileHeaderView: UIView {
     }()
 
     //кнопка show status
-    private lazy var statusButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 16, y: 16+150+16, width: UIScreen.main.bounds.width-32, height: 50))
+    private lazy var setStatusButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Show status", for: .normal)
         button.titleLabel?.text = "Show status"
         button.titleLabel?.textColor = .white
@@ -48,12 +74,13 @@ class ProfileHeaderView: UIView {
 
     //действие при нажатии кнопки
     @objc private func tapAction() {
-        print(statusText.text ?? "no status text")
+        print(statusLabel.text ?? "no status text")
     }
 
     //текст статуса
-    private lazy var statusText: UITextView = {
-        let textView = UITextView(frame: CGRect(x: 200, y: 16+150+16-34-30, width: 200, height: 30))
+    private lazy var statusLabel: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
         textView.text = "Status message..."
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.textColor = UIColor.gray
@@ -61,13 +88,21 @@ class ProfileHeaderView: UIView {
         return textView
     }()
 
+    private lazy var statusTextField: UITextField = {
+        let textField = UITextField()
+        return textField
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(profileImage)
-        addSubview(profileLabel)
-        addSubview(statusButton)
-        addSubview(statusText)
 
+        //добавление элементов
+        addSubview(avatarImageView)
+        addSubview(setStatusButton)
+        addSubview(fullNameLabel)
+        addSubview(statusLabel)
+
+        setLayouts()
     }
 
     required init?(coder: NSCoder) {

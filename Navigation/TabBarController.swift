@@ -1,10 +1,3 @@
-//
-//  TabBarController.swift
-//  Navigation
-//
-//  Created by Evgeny Nikiforov on 08.10.2024.
-//
-
 import UIKit
 
 class TabBarController: UITabBarController {
@@ -21,7 +14,6 @@ class TabBarController: UITabBarController {
     private func setControllers() {
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().tintColor = .blue
-        
         let feedNC = UINavigationController(rootViewController: feedVC)
         let profileNC = UINavigationController(rootViewController: profileVC)
         
@@ -33,8 +25,9 @@ class TabBarController: UITabBarController {
         
         feedNC.view.backgroundColor = .brown
         profileNC.view.backgroundColor = .cyan
-        profileNC.navigationBar.backgroundColor = .white
 
+        profileNC.navigationBar.backgroundColor = .white
+        
         viewControllers = [feedNC, profileNC]
         print(#function)
     }
