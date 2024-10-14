@@ -1,76 +1,127 @@
-//
-//  ProfileHeaderView.swift
-//  Navigation
-//
-//  Created by Evgeny Nikiforov on 08.10.2024.
-//
-
 import UIKit
 
 class ProfileHeaderView: UIView {
-
-    //аватар профиля
-    private lazy var profileImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 16, y: 16, width: 150, height: 150))
-        image.backgroundColor = .white
-        image.image = UIImage(named: "profileImage")
-        image.layer.cornerRadius = 75
-        image.clipsToBounds = true
-        image.layer.borderWidth = 3
-        image.layer.borderColor = UIColor.white.cgColor
-        return image
-    }()
-
-    //имя профиля
-    private lazy var profileLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 200, y: 27, width: 200, height: 18))
-        label.text = "Profile Name"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = UIColor.black
-        return label
-    }()
-
-    //кнопка show status
-    private lazy var statusButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 16, y: 16+150+16, width: UIScreen.main.bounds.width-32, height: 50))
-        button.setTitle("Show status", for: .normal)
-        button.titleLabel?.text = "Show status"
-        button.titleLabel?.textColor = .white
-        button.backgroundColor = .blue
-        button.layer.cornerRadius = 4
-        button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-        button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        button.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
-        return button
-    }()
-
-    //действие при нажатии кнопки
-    @objc private func tapAction() {
-        print(statusText.text ?? "no status text")
-    }
-
-    //текст статуса
-    private lazy var statusText: UITextView = {
-        let textView = UITextView(frame: CGRect(x: 200, y: 16+150+16-34-30, width: 200, height: 30))
-        textView.text = "Status message..."
-        textView.font = UIFont.systemFont(ofSize: 14)
-        textView.textColor = UIColor.gray
-        textView.backgroundColor = UIColor.lightGray
-        return textView
-    }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(profileImage)
-        addSubview(profileLabel)
-        addSubview(statusButton)
-        addSubview(statusText)
-
+        
+        self.addSubview(userName)
+        self.addSubview(userDescription)
+        self.addSubview(userImage)
+        self.addSubview(buttonShowStatus)
+        self.addSubview(statusTextField)
+        
+        addingLayoutConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private lazy var userName: UILabel = {
+        let name = UILabel()
+        
+        name.text = "Mr. Cat"
+        name.font = .boldSystemFont(ofSize: 20)
+        name.textColor = .black
+        
+        return name
+    }()
+    
+    private lazy var userDescription: UILabel = {
+        let description = UILabel()
+        
+        description.text = "Let's cat for something ..."
+        description.font = .systemFont(ofSize: 14, weight: .regular)
+        description.textColor = .gray
+        
+        return description
+    }()
+    
+    private lazy var userImage: UIView = {
+        let image = UIView()
+        
+        image.layer.contents = UIImage(named: "cat")?.cgImage
+        image.layer.contentsGravity = .resizeAspect
+        image.layer.masksToBounds = false
+        image.layer.borderColor = UIColor.white.cgColor
+        image.layer.borderWidth = 3
+        image.layer.cornerRadius = 50
+
+        image.backgroundColor = .systemGreen
+        image.clipsToBounds = true
+        
+        return image
+    }()
+    
+    private lazy var buttonShowStatus: UIButton = {
+        let button = UIButton(type: .custom) as UIButton
+        
+        button.setTitle("Show status", for: .normal)
+        button.backgroundColor = .systemBlue
+
+        button.layer.cornerRadius = 16
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowRadius = 4
+        button.layer.shadowOpacity = 0.7
+        button.layer.shadowColor = UIColor(ciColor: .black).cgColor
+
+        button.addTarget(self, action: #selector(buttonShowStatusPressed), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private lazy var statusTextField: UITextField = {
+        let status = UITextField()
+        status.backgroundColor = .white
+        status.font = .systemFont(ofSize: 15, weight: .regular)
+        status.textColor = .black
+        status.layer.cornerRadius = 12
+        status.layer.borderWidth = 1
+        status.layer.borderColor = UIColor(ciColor: .black).cgColor
+        status.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        return status
+    }()
+    
+    private lazy var statusText: String = ""
+        
+    @objc private func buttonShowStatusPressed() {
+        guard statusText != "" else { return }
+        userDescription.text = statusText
+    }
+    
+    @objc func statusTextChanged(_ textField: UITextField) {
+        statusText = textField.text ?? ""
+    }
+    
+    private func addingLayoutConstraints() {
+        userName.translatesAutoresizingMaskIntoConstraints = false
+        userDescription.translatesAutoresizingMaskIntoConstraints = false
+        userImage.translatesAutoresizingMaskIntoConstraints = false
+        buttonShowStatus.translatesAutoresizingMaskIntoConstraints = false
+        statusTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            userName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+            userName.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            
+            userDescription.topAnchor.constraint(equalTo: userName.topAnchor, constant: 50),
+            userDescription.leadingAnchor.constraint(equalTo: userImage.trailingAnchor, constant: 16),
+            
+            userImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            userImage.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            userImage.heightAnchor.constraint(equalToConstant: 100),
+            userImage.widthAnchor.constraint(equalToConstant: 100),
+            
+            buttonShowStatus.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
+            buttonShowStatus.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            buttonShowStatus.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,constant: -16),
+            buttonShowStatus.heightAnchor.constraint(equalToConstant: 50),
+            
+            statusTextField.topAnchor.constraint(equalTo: userDescription.topAnchor, constant: 20),
+            statusTextField.leadingAnchor.constraint(equalTo: userImage.trailingAnchor, constant: 16),
+            statusTextField.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -16),
+            statusTextField.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
 }

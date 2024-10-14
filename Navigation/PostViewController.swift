@@ -1,35 +1,29 @@
-//
-//  PostViewController.swift
-//  Navigation
-//
-//  Created by Evgeny Nikiforov on 27.09.2024.
-//
-
 import UIKit
 
+struct Post {
+    let title: String
+}
+
 class PostViewController: UIViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setControllers()
-        createBarButtonItem()
-        print(#function)
     }
     
     private func setControllers() {
-        self.view.backgroundColor = .systemGray4
-        if self.title == nil {
-            self.title = "Default post title"
-        }
+        let logoutBarButtonItem = UIBarButtonItem(title: "Info", style: .done, target: self, action: #selector(presentInfoViewController))
+
+        view.backgroundColor = .black
+
+        self.navigationItem.rightBarButtonItem = logoutBarButtonItem
     }
     
-    private func createBarButtonItem() {
-        let barButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(tapAction))
-        navigationItem.rightBarButtonItem = barButtonItem
-    }
-    
-    @objc private func tapAction() {
-        let infoVC = InfoViewController()
-        present(infoVC, animated: true)
+    @objc func presentInfoViewController() {
+        let infoViewController = InfoViewController()
+        let infoNavigationController = UINavigationController(rootViewController: infoViewController)
+      
+        present(infoNavigationController, animated: true, completion: nil)
     }
 }
