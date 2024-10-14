@@ -14,8 +14,9 @@
 		0F640E482CA6F82F002EA640 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F640E472CA6F82F002EA640 /* PostViewController.swift */; };
 		0F640E4A2CA6F847002EA640 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F640E492CA6F847002EA640 /* InfoViewController.swift */; };
 		0FE869052CB5944F0006119E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE869042CB5944F0006119E /* Post.swift */; };
-		0FE869072CB594880006119E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE869062CB594880006119E /* ProfileViewController.swift */; };
 		0FE869092CB594990006119E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE869082CB594990006119E /* TabBarController.swift */; };
+		0FE8690C2CB5B9650006119E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8690B2CB5B9650006119E /* ProfileViewController.swift */; };
+		0FE8690E2CB5B97F0006119E /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8690D2CB5B97F0006119E /* ProfileHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +29,9 @@
 		0F640E472CA6F82F002EA640 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		0F640E492CA6F847002EA640 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		0FE869042CB5944F0006119E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		0FE869062CB594880006119E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0FE869082CB594990006119E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		0FE8690B2CB5B9650006119E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		0FE8690D2CB5B97F0006119E /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		0F3BD3C82CA6F2FC0027B7C9 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				0FE8690A2CB5B9320006119E /* Profile */,
 				0F3BD3D22CA6F2FF0027B7C9 /* Assets.xcassets */,
 				0F3BD3D42CA6F2FF0027B7C9 /* LaunchScreen.storyboard */,
 				0F3BD3C92CA6F2FC0027B7C9 /* AppDelegate.swift */,
@@ -70,10 +73,18 @@
 				0F640E492CA6F847002EA640 /* InfoViewController.swift */,
 				0FE869042CB5944F0006119E /* Post.swift */,
 				0F640E472CA6F82F002EA640 /* PostViewController.swift */,
-				0FE869062CB594880006119E /* ProfileViewController.swift */,
 				0FE869082CB594990006119E /* TabBarController.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		0FE8690A2CB5B9320006119E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0FE8690D2CB5B97F0006119E /* ProfileHeaderView.swift */,
+				0FE8690B2CB5B9650006119E /* ProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,8 +161,9 @@
 				0FE869092CB594990006119E /* TabBarController.swift in Sources */,
 				0F3BD3CA2CA6F2FC0027B7C9 /* AppDelegate.swift in Sources */,
 				0F640E4A2CA6F847002EA640 /* InfoViewController.swift in Sources */,
+				0FE8690E2CB5B97F0006119E /* ProfileHeaderView.swift in Sources */,
 				0FE869052CB5944F0006119E /* Post.swift in Sources */,
-				0FE869072CB594880006119E /* ProfileViewController.swift in Sources */,
+				0FE8690C2CB5B9650006119E /* ProfileViewController.swift in Sources */,
 				0F3BD3DE2CA6F4E90027B7C9 /* FeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
