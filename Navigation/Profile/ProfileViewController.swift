@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    let profileHV = ProfileHeaderView()
+    private lazy var profileHV = ProfileHeaderView()
     
     override func viewDidLoad() {
         super.viewDidLoad()

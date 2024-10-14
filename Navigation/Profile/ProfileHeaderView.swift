@@ -10,7 +10,7 @@ import UIKit
 class ProfileHeaderView: UIView {
 
     //аватар профиля
-    let profileImage: UIImageView = {
+    private lazy var profileImage: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 16, y: 16, width: 150, height: 150))
         image.backgroundColor = .white
         image.image = UIImage(named: "profileImage")
@@ -22,7 +22,7 @@ class ProfileHeaderView: UIView {
     }()
 
     //имя профиля
-    let profileLabel: UILabel = {
+    private lazy var profileLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 200, y: 27, width: 200, height: 18))
         label.text = "Profile Name"
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -31,7 +31,7 @@ class ProfileHeaderView: UIView {
     }()
 
     //кнопка show status
-    let statusButton: UIButton = {
+    private lazy var statusButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 16, y: 16+150+16, width: UIScreen.main.bounds.width-32, height: 50))
         button.setTitle("Show status", for: .normal)
         button.titleLabel?.text = "Show status"
@@ -42,8 +42,7 @@ class ProfileHeaderView: UIView {
         button.layer.shadowRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
-//        button.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
-        button.addTarget(ProfileHeaderView.self, action: #selector(tapAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
         return button
     }()
 
@@ -53,7 +52,7 @@ class ProfileHeaderView: UIView {
     }
 
     //текст статуса
-    let statusText: UITextView = {
+    private lazy var statusText: UITextView = {
         let textView = UITextView(frame: CGRect(x: 200, y: 16+150+16-34-30, width: 200, height: 30))
         textView.text = "Status message..."
         textView.font = UIFont.systemFont(ofSize: 14)
