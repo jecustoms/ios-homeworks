@@ -1,10 +1,3 @@
-//
-//  InfoViewController.swift
-//  Navigation
-//
-//  Created by Evgeny Nikiforov on 27.09.2024.
-//
-
 import UIKit
 
 class InfoViewController: UIViewController {
@@ -14,13 +7,12 @@ class InfoViewController: UIViewController {
         setControllers()
         createButton()
     }
-    
+
     private func setControllers() {
-        self.view.backgroundColor = .systemGray6
         if self.title == nil {
             self.title = "Default info title"
         }
-        
+        self.view.backgroundColor = .systemGray6
     }
 
     private func createButton() {
@@ -30,7 +22,7 @@ class InfoViewController: UIViewController {
         button.setTitle("Press", for: .normal)
         button.backgroundColor = .systemMint
         button.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
-        
+       
         view.addSubview(button)
         
         print(#function)
@@ -42,12 +34,12 @@ class InfoViewController: UIViewController {
             print("OK pressed")
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { _ in
-            print("CANCEL pressed")
+            print("Cancel pressed")
         }
         
         alert.addAction(okAction)
         alert.addAction(cancelAction)
-        
+       
         present(alert, animated: true)
     }
 }

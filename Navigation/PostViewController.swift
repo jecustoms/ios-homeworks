@@ -1,10 +1,3 @@
-//
-//  PostViewController.swift
-//  Navigation
-//
-//  Created by Evgeny Nikiforov on 27.09.2024.
-//
-
 import UIKit
 
 class PostViewController: UIViewController {
@@ -17,10 +10,10 @@ class PostViewController: UIViewController {
     }
     
     private func setControllers() {
-        self.view.backgroundColor = .systemGray4
         if self.title == nil {
             self.title = "Default post title"
         }
+        self.view.backgroundColor = .systemGray4
     }
     
     private func createBarButtonItem() {
